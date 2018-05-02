@@ -1,0 +1,39 @@
+<!--
+  Generated template for the MapsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>
+        Near-me
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <div #map id="map"></div>
+  
+    <div style="width: 100%; height: 60%;">
+      <ion-card *ngFor="let place of places">
+        <!--<img [src] ="place.photos[0].getUrl()" alt="Thumbnail"/>-->
+          <img src="{{ place.photos ? place.photos[0].getUrl({'maxWidth': 320, 'maxHeight':240}) : imgSrc}}">
+          <ion-item>
+            <ion-icon name="restaurant" item-left large ></ion-icon>
+            <h2>{{place.name}}</h2>
+            <p>{{place.vicinity}}</p>
+          </ion-item>
+        
+          <ion-item>
+            <span item-left>Rating: {{place.rating ? place.rating : "NaN"}}</span>
+            <button ion-button icon-left clear item-end (click)="startNavigation(place.geometry.location.lat(),place.geometry.location.lng(),place.name)">
+              <ion-icon name="navigate"></ion-icon>
+              Start
+            </button>
+          </ion-item>
+          
+      </ion-card>
+  </div>
+  </ion-content>
